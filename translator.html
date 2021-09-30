@@ -108,8 +108,6 @@
         if (!conversation) return;
 
         let { message } = data;
-        console.log('Message subject:', message.subject);
-        console.log('Message subject:', message.body);
         translateEmail(message);
       },
     },
@@ -188,8 +186,10 @@
       {
         message.body = message.body.substring(0, quote);
       }
+
+      console.log(`message body: ${ message.subject }`);
       console.log(`message body: ${ message.body }`);
-      translateString(message.subject, "#subject", true);
+      // translateString(message.subject, "#subject", true);
       translateString(message.body, "#message", true);
     }
   }
