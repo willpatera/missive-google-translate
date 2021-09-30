@@ -200,7 +200,7 @@
       type: "POST",
       headers: { "X-HTTP-Method-Override": "GET" },
       url: `https://www.googleapis.com/language/translate/v2?key=${ apiKey }`,
-      dataType: "json",
+      dataType: "jsonp",
       data: {
         format: format,
         source: langSource,
