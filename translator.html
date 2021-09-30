@@ -186,14 +186,14 @@
       {
         message.body = message.body.substring(0, quote);
       }
-      translateString(message.subject, "#subject", true, 'string');
-      translateString(message.body, "#message", true, 'html');
+      translateString([message.subject, message.body]);
     }
   }
 
-  function translateString(text, target, detectLang, format) {
+  function translateString(text) {
     $("#translated").show();
     $("#translate").hide();
+    let detectLang = true; 
 
     console.log(`text: ${ text }`)
     $.ajax({
@@ -202,8 +202,6 @@
       url: `https://www.googleapis.com/language/translate/v2?key=${ apiKey }`,
       dataType: "jsonp",
       data: {
-        format: format,
-        source: langSource,
         target: langTarget,
         q: text,
       },
@@ -212,9 +210,11 @@
           showError(strError, strErrorTip);
         } else {
           if (detectLang) {
-            langDetected = result.data.translations[0].detectedSourceLanguage;
+            langDetected = result.data.translations[1].detectedSourceLanguage;
           }
-          $(target).html(result.data.translations[0].translatedText);
+          $('#subject').html(result.data.translations[0].translatedText);
+          $('#message').html(result.data.translations[1].translatedText);
+
           if (langDetected) {
             var lang = languages.find(languages => languages.language === langDetected).name;
             $('#lang').html('<span id="language">' + lang + '</span>');
