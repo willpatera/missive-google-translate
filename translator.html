@@ -200,11 +200,10 @@
 
     $.ajax({
       type: "POST",
-      headers: { "X-HTTP-Method-Override": "GET" },
-      url: "https://www.googleapis.com/language/translate/v2",
+      // headers: { "X-HTTP-Method-Override": "GET" },
+      url: `https://www.googleapis.com/language/translate/v2?key=${ apiKey }`,
       dataType: "jsonp",
       data: {
-        key: apiKey,
         source: langSource,
         target: langTarget,
         q: text
