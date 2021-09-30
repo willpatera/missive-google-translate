@@ -206,7 +206,7 @@
       data: {
         source: langSource,
         target: langTarget,
-        q: text
+        q: `'${ text }'` // wrap in single string
       },
       success: function (result) {
         if (result.error) {
