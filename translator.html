@@ -186,15 +186,12 @@
       {
         message.body = message.body.substring(0, quote);
       }
-
-      console.log(`message body: ${ message.subject }`);
-      console.log(`message body: ${ message.body }`);
-      translateString(message.subject, "#subject", true);
-      translateString(message.body, "#message", true);
+      translateString(message.subject, "#subject", true, 'text');
+      translateString(message.body, "#message", true, 'html');
     }
   }
 
-  function translateString(text, target, detectLang) {
+  function translateString(text, target, detectLang, format) {
     $("#translated").show();
     $("#translate").hide();
 
@@ -204,9 +201,10 @@
       url: `https://www.googleapis.com/language/translate/v2?key=${ apiKey }`,
       dataType: "jsonp",
       data: {
+        format: format,
         source: langSource,
         target: langTarget,
-        q: `'${ text }'` // wrap in single string
+        q: text,
       },
       success: function (result) {
         if (result.error) {
