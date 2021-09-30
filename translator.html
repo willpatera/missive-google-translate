@@ -186,8 +186,8 @@
       {
         message.body = message.body.substring(0, quote);
       }
-      translateString([message.subject, message.body], "#message", true, 'html');
-      // translateString(message.body, "#message", true, 'html');
+      translateString(message.subject, "#message", true, 'string');
+      translateString(message.body, "#message", true, 'html');
     }
   }
 
@@ -198,7 +198,7 @@
     console.log(`text: ${ text }`)
     $.ajax({
       type: "POST",
-      // headers: { "X-HTTP-Method-Override": "GET" },
+      headers: { "X-HTTP-Method-Override": "GET" },
       url: `https://www.googleapis.com/language/translate/v2?key=${ apiKey }`,
       dataType: "json",
       data: {
