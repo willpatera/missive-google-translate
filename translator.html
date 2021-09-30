@@ -195,6 +195,7 @@
     $("#translated").show();
     $("#translate").hide();
 
+    console.log(`text: ${ text }`)
     $.ajax({
       type: "POST",
       // headers: { "X-HTTP-Method-Override": "GET" },
